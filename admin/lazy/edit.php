@@ -1,3 +1,22 @@
+<?php
+//connect to database
+$servername = "localhost";
+$username = "root";
+$password = "1234";
+$dbname = "phpcrud";
+
+//connecting to database
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//selection query
+$query = 'SELECT * FROM wearelazies WHERE id = '.$_GET['id'];
+$sth = $conn->prepare($query);
+$sth->execute();
+
+$lazy = $sth->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +27,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Add New</title>
+    <title>Edit</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
 
@@ -111,22 +130,21 @@
 
 
 
-            <form id="product-entry-form" method="post" action="store.php" role="form">
-
-                <div class="messages"></div>
-<h1>ADD NEW</h1>
+            <form id="product-entry-form" method="post" action="update.php" role="form">
+                 <div class="messages"></div>
+<h1>Edit a Lazy to make smart</h1>
                 <div class="controls">
                     <div class="row">
-                        <div class="col-lg-6">
-                           &nbsp;
-                        </div>
-                        <div class="col-lg-6">
+                        <input id="id"  value="<?php echo $lazy['id']?>" type="hidden" name="id" class="form-control">
+
+                    </div>
+<!--                        <div class="col-lg-6">-->
 <!--                            <div class="form-group">-->
 <!--                                <label for="brand_id">brand_id</label>-->
 <!--                                <input id="brand_id"  value="" type="text" name="brand_id" class="form-control">-->
 <!--                                <div class="help-block with-errors"></div>-->
 <!--                            </div>-->
-                        </div>
+<!--                        </div>-->
 <!--                        <div class="col-lg-6">-->
 <!--                            <div class="form-group">-->
 <!--                                <label for="label_id">label_id</label>-->
@@ -137,10 +155,10 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="title">Enter Product Title</label>
-                                <input id="title"
-                                       value=""
+                                <input id="lazy"
+                                       value="<?php echo $lazy['lazy']?>"
                                        type="text"
-                                       name="title"
+                                       name="lazy"
                                        placeholder="e.g. Bashundhara Tissue"
                                        autofocus="autofocus"
                                        class="form-control">

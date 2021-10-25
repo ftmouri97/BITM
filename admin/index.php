@@ -56,6 +56,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="lazy/index.php">
+                            <span data-feather="shopping-cart"></span>
+                            Lazies
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="users"></span>
                             Customers

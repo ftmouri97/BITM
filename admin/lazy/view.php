@@ -2,7 +2,7 @@
 //connect to database
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "1234";
 $dbname = "phpcrud";
 
 //connecting to database
@@ -10,21 +10,15 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //selection query
-$query = "SELECT * FROM products";
+$query = 'SELECT * FROM `wearelazies` WHERE id = '.$_GET['id'];
 $sth = $conn->prepare($query);
 $sth->execute();
-$products = $sth->fetchAll(PDO::FETCH_ASSOC);
-//foreach($products as $row){
-//echo "<pre>";
-//print_r($row['mrp']);
-//echo "</pre>";
-//
-//}
-//die();
-   // echo "<li>".$product['title']."</li>";
 
+$aLazy = $sth->fetch(PDO::FETCH_ASSOC);
 
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -79,7 +73,7 @@ $products = $sth->fetchAll(PDO::FETCH_ASSOC);
                     <li class="nav-item">
                         <a class="nav-link active" href="../../front/addToCart.html">
                             <span data-feather="shopping-cart"></span>
-                            Products
+                            A Lazy
                         </a>
                     </li>
                     <li class="nav-item">
@@ -139,68 +133,33 @@ $products = $sth->fetchAll(PDO::FETCH_ASSOC);
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 >Product</h1>
+                <h1 >A Lazy</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <button type="button" class="btn btn-sm btn-outline-secondary">
                         <span data-feather="calendar"></span>
-                        <a href="add.php" style="color: black">Add New</a>
+                        <a href="../form.html" style="color: black">Add New</a>
                     </button>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 ftco-animate">
-                    <div class="cart-list">
-                        <table class="table">
-                            <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th>&nbsp;</th>
-                                <th>Picture</th>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            if($products){
-                            foreach($products as $product){
-                            ?>
-                            <tr class="text-center">
-                                <td class="product-sl">&nbsp;</td>
+                <div class="col-md-12 ">
+                    <section >
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm col-md-6 col-lg-3 ">
+                                    <div class="product">
 
-                                <td class="image-prod"><div class="img"><img src="<?php echo $product['picture']?>" width="140px" height="120px"></div></td>
+                                        <div class="text ">
+                                            <h3><?php echo $aLazy['lazy']?></h3>
 
-                                <td class="product-name">
-                                    <h3><a href="view.php?id=<?php echo $product['id'] ?>"><?php echo $product['title'];?></a></h3>
-                                    <p><?php echo $product['brands'];?> <?php echo $product['category'];?></p>
-                                </td>
-                                <td class="product-price">
-                                    <?php
-                                    if($product['special_price'] > 0){
-                                        echo "<strike>".$product['mrp']."</strike>";
-                                        echo $product['special_price'];
 
-                                    }else{
-                                        echo $product['mrp'];
-                                    }
-                                    ?>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                </td>
-                                <td> <a href="edit.php?id=<?php echo $product['id']?>">Edit</a>
-                                    | <a href="delete.php?id=<?php echo $product['id']?>">Delete</a></td>
-                            </tr>
-                            <?php }}else{
-                                ?>
-                                <tr class="text-center">
-                                    <td colspan="5">
-                                        There is no product available. <a href="add.php">Click Here</a> to add a product.
-                                    </td>
-                                </tr>
-                                <?php
-                            } ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
 

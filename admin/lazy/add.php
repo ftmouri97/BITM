@@ -110,11 +110,12 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-
+<!--   form tag-->
+            
             <form id="product-entry-form" method="post" action="store.php" role="form">
 
                 <div class="messages"></div>
-<h1>ADD NEW</h1>
+<h1>ADD NEW Lazy</h1>
                 <div class="controls">
                     <div class="row">
                         <div class="col-lg-6">
@@ -136,11 +137,11 @@
 <!--                        </div>-->
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="title">Enter Product Title</label>
-                                <input id="title"
+                                <label for="title">Enter Name of the Lazy </label>
+                                <input id="lazy"
                                        value=""
                                        type="text"
-                                       name="title"
+                                       name="lazy"
                                        placeholder="e.g. Bashundhara Tissue"
                                        autofocus="autofocus"
                                        class="form-control">

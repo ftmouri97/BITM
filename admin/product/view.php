@@ -2,7 +2,7 @@
 //connect to database
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "root";
 $dbname = "phpcrud";
 
 //connecting to database
@@ -10,7 +10,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //selection query
-$query = "SELECT * FROM products WHERE id = ".$_GET['id'];
+$query = 'SELECT * FROM products WHERE id = '.$_GET['id'];
 $sth = $conn->prepare($query);
 $sth->execute();
 

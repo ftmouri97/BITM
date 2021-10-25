@@ -13,7 +13,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $query = "SELECT * FROM products";
 $sth = $conn->prepare($query);
 $sth->execute();
-$products = $sth->fetchAll(PDO::FETCH_ASSOC);
+$lazies = $sth->fetchAll(PDO::FETCH_ASSOC);
 //foreach($products as $row){
 //echo "<pre>";
 //print_r($row['mrp']);
@@ -85,6 +85,12 @@ $products = $sth->fetchAll(PDO::FETCH_ASSOC);
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="users"></span>
+                            Lazies
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users"></span>
                             Customers
                         </a>
                     </li>
@@ -139,7 +145,7 @@ $products = $sth->fetchAll(PDO::FETCH_ASSOC);
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 >Product</h1>
+                <h1 >THE Lazies</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <button type="button" class="btn btn-sm btn-outline-secondary">
                         <span data-feather="calendar"></span>
@@ -154,46 +160,35 @@ $products = $sth->fetchAll(PDO::FETCH_ASSOC);
                             <thead class="thead-primary">
                             <tr class="text-center">
                                 <th>&nbsp;</th>
-                                <th>Picture</th>
-                                <th>Title</th>
-                                <th>Price</th>
+
+                                <th>Name of the Lazy</th>
+
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if($products){
-                            foreach($products as $product){
+                            if($lazies){
+                            foreach($lazies as $lazy){
                             ?>
                             <tr class="text-center">
                                 <td class="product-sl">&nbsp;</td>
 
-                                <td class="image-prod"><div class="img"><img src="<?php echo $product['picture']?>" width="140px" height="120px"></div></td>
 
                                 <td class="product-name">
-                                    <h3><a href="view.php?id=<?php echo $product['id'] ?>"><?php echo $product['title'];?></a></h3>
-                                    <p><?php echo $product['brands'];?> <?php echo $product['category'];?></p>
+                                    <h3><a href="view.php?id=<?php echo $lazy['id'] ?>"><?php echo $lazy['lazy'];?></a></h3>
+                                   </p>
                                 </td>
-                                <td class="product-price">
-                                    <?php
-                                    if($product['special_price'] > 0){
-                                        echo "<strike>".$product['mrp']."</strike>";
-                                        echo $product['special_price'];
 
-                                    }else{
-                                        echo $product['mrp'];
-                                    }
-                                    ?>
-
-                                </td>
-                                <td> <a href="edit.php?id=<?php echo $product['id']?>">Edit</a>
-                                    | <a href="delete.php?id=<?php echo $product['id']?>">Delete</a></td>
+                                <td> <a href="edit.php?id=<?php echo $lazy['id']?>">Edit</a>
+                                    | <a href="delete.php?id=<?php echo $lazy['id']?>">Delete</a></td>
                             </tr>
-                            <?php }}else{
+                            <?php }
+                            }else{
                                 ?>
                                 <tr class="text-center">
                                     <td colspan="5">
-                                        There is no product available. <a href="add.php">Click Here</a> to add a product.
+                                        There is no lazy  available. <a href="add.php">Click Here</a> to add a product.
                                     </td>
                                 </tr>
                                 <?php
